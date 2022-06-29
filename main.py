@@ -18,10 +18,10 @@ def predict():
     sea = float(request.form.get('Sea'))
     sqft = float(request.form.get('total_sqft'))
     print(sea,sqft)
-
-    input=pd.DataFrame([[sqft,sea]],columns=["size","sea view"])
-    prediction=str(np.round((pipe.predict(input)[0]+0.2)/100,2)) # I have converted Lakhs into Crores. Since data set is old, so I have added 0.2(20lakhs to compansate inflation.
-    return "As per your requirement the predicted house price is {} crore".format(prediction)
+    data=[[sqft,sea]]
+    input=pd.DataFrame(data,columns=["size","view"])
+    prediction=pipe.predict(input) # I have converted Lakhs into Crores. Since data set is old, so I have added 0.2(20lakhs to compansate inflation.
+    return "As per your requirement the predicted house price is {}".format(prediction)
 
 if __name__=="__main__":
     app.run(debug=True,port=5000)
