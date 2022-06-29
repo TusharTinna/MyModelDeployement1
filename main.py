@@ -4,14 +4,11 @@ from flask import Flask, render_template,request
 import pickle
 
 app=Flask(__name__)
-data=pd.read_csv("real_estate_price_size_year_view.csv")
 pipe=pickle.load(open("House_Model.pkl","rb"))
 
 @app.route('/')
 def index():
-
-    locations=sorted(data["location"].unique())
-    return render_template('index.html', locations=locations)
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
